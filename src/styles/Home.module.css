@@ -24,18 +24,11 @@
 .main {
   z-index: 2;
   max-width: 1200px;
-  min-height: 100vh;
+  height: 100vh;
   padding: 1rem 4rem;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
 }

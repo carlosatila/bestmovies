@@ -28,6 +28,8 @@ input {
   outline: none;
 }
 
+/* INPUT PLACEHOLDER */
+
 ::-webkit-input-placeholder {
   color: var(--color-gray);
 }
@@ -36,6 +38,19 @@ input {
 }
 ::placeholder {
   color: var(--color-gray);
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: .5em;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray);
+  outline: 0;
 }
 
 :root {
