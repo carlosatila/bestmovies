@@ -49,16 +49,20 @@ input {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray);
+  background-color: #57575f;
   outline: 0;
 }
+
+/* VARS */
 
 :root {
   --color-background: #2d3436;
   --color-primary: #a29bfe;
+  --color-primary-strong: #6c5ce7;
 
   --color-gray: #b2bec3;
   --color-gray-light: #dfe6e9;
 
   --color-white: #fff;
+  --color-green: #00b894;
 }
