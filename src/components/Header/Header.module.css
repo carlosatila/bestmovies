@@ -11,3 +11,8 @@
   color: var(--color-primary);
   font-weight: bold;
 }
+
+.search_wrapper {
+  display: flex;
+  gap: 20px;
+}

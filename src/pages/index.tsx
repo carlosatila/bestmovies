@@ -1,23 +1,40 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+import {
+  fetchAsync,
+  selectMovies,
+  statusMovie,
+  selectedMovie,
+  fetchDetailsAsync,
+} from '../modules/movies/moviesSlice'
 import Header from '../components/Header'
 import MoviesList from '../components/MoviesList'
+import MovieDetails from '../components/MovieDetails'
 import styles from '../styles/Home.module.css'
 
+interface MovieProp {
+  id: number;
+  poster_path: string;
+  vote_average: number;
+  title: string;
+  release_date: Date;
+}
+
 const Home: NextPage = () => {
-  const [movies, setMovies] = useState([]);
+  const dispatch = useAppDispatch();
+  const movie = useAppSelector(selectedMovie);
+  const movies = useAppSelector(selectMovies);
+  const status = useAppSelector(statusMovie);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch('api/movies');
-      const data = await result.json();
+    dispatch(fetchAsync())
+  }, [dispatch]);
 
-      setMovies(data?.results);
-    };
-
-    fetchData();
-  }, []);
+  const handleSelectMovie = (movie: MovieProp) => {
+    dispatch(fetchDetailsAsync(movie.id.toString()));
+  }
 
   return (
     <div className={styles.container}>
@@ -28,7 +45,14 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <Header />
-        <MoviesList data={movies} />
+        {(movie && !!Object.keys(movie).length)
+          ? <MovieDetails movie={movie} />
+          : <MoviesList
+              data={movies}
+              status={status}
+              onClick={(movie: MovieProp) => handleSelectMovie(movie)}
+            />
+        }
       </main>
     </div>
   )

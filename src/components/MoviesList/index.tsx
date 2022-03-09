@@ -2,19 +2,45 @@ import Image from 'next/image';
 import { format } from 'date-fns';
 import { config } from '../../config';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import Loading from "react-loading";
 import 'react-circular-progressbar/dist/styles.css';
 import styles from './MoviesList.module.css'
 
-type MoviesProp = {
-  data: Array<any>;
+interface MovieProp {
+  id: number;
+  poster_path: string;
+  vote_average: number;
+  title: string;
+  release_date: Date;
 }
 
-const MoviesList = (data: MoviesProp) => {
+interface DataProp {
+  page?: number;
+  results?: Array<MovieProp>;
+  total_pages?: number;
+  total_results?: number;
+}
+
+interface MoviesListProp {
+  data: DataProp;
+  status: string;
+  onClick: Function;
+}
+
+const MoviesList = ({ data, status, onClick }: MoviesListProp) => {
+  if (status === 'loading') {
+    return (
+      <div className={styles.grid}>
+        <Loading type='cylon' color='#fff' />
+      </div>
+    );
+  }
+
   return (
     <section className={styles.movies}>
       <div className={styles.grid}>
-        {data.data.map(movie => (
-          <div className={styles.card} key={movie.id}>
+        {(data.results || []).map((movie: MovieProp) => (
+          <div className={styles.card} key={movie.id} onClick={() => onClick(movie)}>
             <div className={styles.image_wrapper}>
               <Image
                 loading='lazy'
@@ -38,7 +64,9 @@ const MoviesList = (data: MoviesProp) => {
                 />
               </div>
               <h3>{movie.title}</h3>
-              <span>{format(new Date(movie.release_date), 'MMM, LL yyyy')}</span>
+              {movie.release_date && (
+                <span>{format(new Date(movie.release_date), 'MMM, LL yyyy')}</span>
+              )}
             </div>
           </div>
         ))}

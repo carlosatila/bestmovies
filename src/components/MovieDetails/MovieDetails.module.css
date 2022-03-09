@@ -1,0 +1,60 @@
+.details {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  color: var(--color-white);
+}
+
+.details > section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-height: 450px;
+  padding: 20px;
+  background-color: var(--color-background);
+  opacity: 0.9;
+}
+
+.details > section > h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 32px;
+  margin: 0;
+}
+
+.details > section > h2 > small {
+  font-size: 18px;
+  color: var(--color-gray-light);
+}
+
+.details > section > div.progress {
+  width: 20%;
+}
+
+.details > section > div.tag {
+  text-align: center;
+}
+
+.details > section > div.tag > p {
+  font-style: italic;
+  font-size: 18px;
+  margin: 0;
+}
+
+.details > section > article {
+  width: 100%;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.details > section > article > h3 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.details > section > article > p {
+  margin: 5px 0 0 0;
+}
